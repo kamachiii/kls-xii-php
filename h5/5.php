@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $inputData = $_POST['data'];
         $_SESSION['data'][] = $inputData;
     } elseif (isset($_POST['reset'])) {
-        $_SESSION['data'] = array();
+        $_SESSION['data'] = [];
     }
 }
 
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <?php if (count($_SESSION['data']) < 20) : ?>
         <form method="post" action="">
-            <input type="text" name="data" id="data" autofocus>
+            <input type="text" name="data" id="data" autocomplete="off" autofocus required>
             <button type="submit">Submit</button>
         </form>
     <?php else : ?>
