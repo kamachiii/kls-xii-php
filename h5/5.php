@@ -62,13 +62,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <tr>
             <th>Bilangan hasil input</th>
             <td>
-                <?php if(count($_SESSION['data']) > 0) : ?>
-                    <?php foreach ($_SESSION['data'] as $data) : ?>
-                        <?php echo $data.", "; ?>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    NULL
-                <?php endif ?>
+                <?php
+                    if(count($_SESSION['data']) > 0) {
+                        for($i = 0; $i < count($_SESSION['data']); $i++) {
+                            if($i != count($_SESSION['data'])-1) {
+                                echo $_SESSION['data'][$i].", ";
+                            }else{
+                                echo $_SESSION['data'][$i];
+                            }
+                        }
+                    }else{
+                        echo "NULL";
+                    }
+                ?>
             </td>
         </tr>
         <tr>
