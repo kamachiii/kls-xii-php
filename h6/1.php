@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <h1>Input Data</h1>
 
-    <?php if (count($_SESSION['data']) < 20) : ?>
+    <?php if (count($_SESSION['data']) < 15) : ?>
         <form method="post" action="">
             <input type="text" name="nama" id="data" autocomplete="off" placeholder="Nama" autofocus required>
             <input type="text" name="hadir" id="data" autocomplete="off" placeholder="Kehadiran" required>
@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if($rata >= 475/5 && $data['hadir'] == 100){
                         $juara = "Juara";
                     }else{
-                        $juara = "-";
+                        $juara = NULL;
                     }
                     echo "
                         <tr>

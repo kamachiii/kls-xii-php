@@ -48,14 +48,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         #vip{
             margin-left: 38px;
+            padding-right: 107px;
         }
 
         #eks{
-            margin-left: 2px;
+            margin-left: 1px;
+            padding-right: 107px;
         }
 
         #eko{
-            margin-left: 5px;
+            margin-left: 4px;
+            padding-right: 107px;
         }
     </style>
     <title>Document</title>
@@ -69,17 +72,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <br>
 
         <label for="vip">Tiket VIP : </label>
-        <input type="number" name="vip" id="vip" autocomplete="off" placeholder="Terjual" required>
+        <input type="number" min='0' max="50" name="vip" id="vip" autocomplete="off" placeholder="Terjual" required>
 
         <br>
 
         <label for="eks">Tiket Eksekutif : </label>
-        <input type="number" name="eks" id="eks" autocomplete="off" placeholder="Terjual" required>
+        <input type="number" min='0' max="50" name="eks" id="eks" autocomplete="off" placeholder="Terjual" required>
 
         <br>
 
         <label for="eko">Tiket Ekonomi : </label>
-        <input type="number" name="eko" id="eko" autocomplete="off" placeholder="Terjual" required>
+        <input type="number" min='0' max="50" name="eko" id="eko" autocomplete="off" placeholder="Terjual" required>
 
         <br>
 
@@ -122,17 +125,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $data['vipD'] = 0.25;
                     }elseif($data['vip'] >= 25){
                         $data['vipD'] = 0.15;
-                    }else{
+                    }elseif($data['vip'] > 0){
                         $data['vipD'] = 0.05;
+                    }else{
+                        $data['vipD'] = 0;
                     }
                     if($data['eks'] >= 40){
                         $data['eksD'] = 0.2;
                     }elseif($data['eks'] >= 20){
                         $data['eksD'] = 0.1;
-                    }else{
+                    }elseif($data['eks'] > 0){
                         $data['eksD'] = 0.02;
+                    }else{
+                        $data['eksD'] = 0;
                     }
-                    $data['ekoD'] = 0.07;
+                    $data['eko'] > 0 ? $data['ekoD'] = 0.07 : $data['ekoD'] = 0;
 
                     $totalVip = $totalVip + $data['vip'];
                     $totalEks = $totalEks + $data['eks'];
@@ -161,10 +168,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $totalEkoD = $totalEkoD*100;
                 $keuntungan = $totalVipD + $totalEksD + $totalEkoD;
 
-            }else{
-                echo "NULL";
             }
         ?>
+        <?php if(count($_SESSION['data']) > 0) : ?>
         <tr>
             <th colspan="2">JUMLAH</th>
             <th><?= $totalVip ?></th>
@@ -175,6 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <th><?= $totalEkoD."%" ?></th>
             <th><?= $keuntungan."%" ?></th>
         </tr>
+        <?php endif ?>
     </table>
 </body>
 </html>
